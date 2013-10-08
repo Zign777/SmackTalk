@@ -16,7 +16,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import android.widget.LinearLayout.LayoutParams;
 
-//do
+//comment here
 public class MessageAdapter extends BaseAdapter {
 	ArrayList<Message> messages;
 	Context mContext;
