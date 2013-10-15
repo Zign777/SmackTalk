@@ -1,13 +1,21 @@
 package com.smacktalk.main;
 
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Random;
+
+import name.giacomofurlan.udpmessenger.UDPMessenger;
 
 import com.color.speechbubble.R;
 import com.color.speechbubble.R.id;
 import com.color.speechbubble.R.layout;
+import com.smacktalk.utility.Messenger;
 
+import android.annotation.SuppressLint;
 import android.app.ListActivity;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +30,10 @@ public class MessageActivity extends ListActivity {
 	EditText text;
 	static Random rand = new Random();	
 	static String sender;
+	public static final String SERVERIP = "127.0.0.1"; // 'Within' the emulator!
+    public static final int SERVERPORT = 4444;
+    boolean start;
+    NetworkMessage messenger;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -37,10 +49,12 @@ public class MessageActivity extends ListActivity {
 		messages.add(new Message("Hello"+"\n - Etai", true));
 		messages.add(new Message("Hi!"+"\n - Joelle", false));
 		messages.add(new Message("What's up"+"\n - John", false));
+		start = false;
 		
-
 		adapter = new MessageAdapter(this, messages);
 		setListAdapter(adapter);
+		messenger = new NetworkMessage(this.getApplicationContext(),"test", SERVERPORT);
+		messenger.startMessageReceiver();
 	
 	}
 	public void sendMessage(View v)
@@ -49,68 +63,44 @@ public class MessageActivity extends ListActivity {
 		System.out.println("I'm here");
 		if(newMessage.length() > 0)
 		{
-			text.setText("");
+			messenger.sendMessage(newMessage);
 			addNewMessage(new Message(newMessage, true));
-			new SendMessage().execute();
+			
+			start = true;
 		}
 	}
-	private class SendMessage extends AsyncTask<Void, String, String>
-	{
-		@Override
-		protected String doInBackground(Void... params) {
-			try {
-				Thread.sleep(2000); //simulate a network call
-			}catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			
-			this.publishProgress(String.format("%s started writing", sender));
-			try {
-				Thread.sleep(2000); //simulate a network call
-			}catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			this.publishProgress(String.format("%s has entered text", sender));
-			try {
-				Thread.sleep(3000);//simulate a network call
-			}catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			
-			
-			return Utility.messages[rand.nextInt(Utility.messages.length-1)];
-			
-			
-		}
-		@Override
-		public void onProgressUpdate(String... v) {
-			
-			if(messages.get(messages.size()-1).isStatusMessage)//check wether we have already added a status message
-			{
-				messages.get(messages.size()-1).setMessage(v[0]); //update the status for that
-				adapter.notifyDataSetChanged(); 
-				getListView().setSelection(messages.size()-1);
-			}
-			else{
-				addNewMessage(new Message(true,v[0])); //add new message, if there is no existing status message
-			}
-		}
-		@Override
-		protected void onPostExecute(String text) {
-			if(messages.get(messages.size()-1).isStatusMessage)//check if there is any status message, now remove it.
-			{
-				messages.remove(messages.size()-1);
-			}
-			
-			addNewMessage(new Message(text, false)); // add the orignal message from server.
-		}
-		
-
-	}
+	
 	void addNewMessage(Message m)
 	{
 		messages.add(m);
 		adapter.notifyDataSetChanged();
 		getListView().setSelection(messages.size()-1);
+	}
+	private class NetworkMessage extends UDPMessenger{
+
+		public NetworkMessage(Context context, String tag, int multicastPort)
+				throws IllegalArgumentException {
+			super(context, tag, multicastPort);
+			// TODO Auto-generated constructor stub
+		}
+
+		@Override
+		protected Runnable getIncomingMessageAnalyseRunnable() {
+			Runnable incoming = new Runnable(){
+
+				@Override
+				public void run() {
+					addNewMessage(new com.smacktalk.main.Message(incomingMessage.getMessage(), false));
+					System.out.println(incomingMessage.getMessage());
+					
+				}
+				
+			};
+			return incoming;
+		}
+		public String getMessage(){
+			return incomingMessage.getMessage();
+		}
+		
 	}
 }

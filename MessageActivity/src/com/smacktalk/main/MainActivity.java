@@ -1,5 +1,7 @@
 package com.smacktalk.main;
 
+import java.io.IOException;
+
 import com.color.speechbubble.R;
 import com.color.speechbubble.R.layout;
 import com.color.speechbubble.R.menu;
@@ -28,6 +30,16 @@ public class MainActivity extends Activity {
 			Intent i = new Intent(MainActivity.this, MessageActivity.class);
 			       startActivity(i);
 
+	}
+	public void test(View v){
+		NetworkAdapter adapter = new NetworkAdapter(this.getBaseContext());
+		try {
+			//System.out.println(adapter.getBroadcastAddress().toString());
+			adapter.sendPacket();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
