@@ -18,10 +18,10 @@ import android.widget.LinearLayout.LayoutParams;
 
 //comment here
 public class MessageAdapter extends BaseAdapter {
-	ArrayList<Message> messages;
+	ArrayList<SmackTalkMessage> messages;
 	Context mContext;
 
-	public MessageAdapter(Context context, ArrayList<Message> m){
+	public MessageAdapter(Context context, ArrayList<SmackTalkMessage> m){
 		super();
 		mContext = context;
 		messages = m;
@@ -45,7 +45,7 @@ public class MessageAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		Message message = (Message) this.getItem(position);
+		SmackTalkMessage message = (SmackTalkMessage) this.getItem(position);
 
 		ViewHolder holder; 
 		if(convertView == null)

@@ -6,7 +6,7 @@ package com.smacktalk.main;
  * @author Adil Soomro
  *
  */
-public class Message {
+public class SmackTalkMessage {
 	/**
 	 * The content of the message
 	 */
@@ -24,7 +24,7 @@ public class Message {
 	/**
 	 * Constructor to make a Message object
 	 */
-	public Message(String message, boolean isMine) {
+	public SmackTalkMessage(String message, boolean isMine) {
 		super();
 		this.message = message;
 		this.isMine = isMine;
@@ -35,7 +35,7 @@ public class Message {
 	 * consider the parameters are swaped from default Message constructor,
 	 *  not a good approach but have to go with it.
 	 */
-	public Message(boolean status, String message) {
+	public SmackTalkMessage(boolean status, String message) {
 		super();
 		this.message = message;
 		this.isMine = false;
