@@ -98,6 +98,10 @@ public class MessageActivity extends ListActivity {
 		
 		adapter = new MessageAdapter(this, messages);
 		setListAdapter(adapter);
+		/*
+		 * IN THIS METHOD IS WHERE THE SCREEN BACKGROUND CAN BE CHANGED.
+		 * Also this same method can be used to show the messages in history
+		 */
 		
 		mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
@@ -263,12 +267,14 @@ public class MessageActivity extends ListActivity {
                 // construct a string from the buffer
                 String writeMessage = new String(writeBuf);
                 addNewMessage(new SmackTalkMessage("Me: "+ writeMessage,true));
+                //can users messages to databases here
                 break;
             case MESSAGE_READ:
                 byte[] readBuf = (byte[]) msg.obj;
                 // construct a string from the valid bytes in the buffer
                 String readMessage = new String(readBuf, 0, msg.arg1);
                 addNewMessage(new SmackTalkMessage(mConnectedDeviceName+":  " + readMessage,false));
+                //can add received messages to database here
                 break;
             case MESSAGE_DEVICE_NAME:
                 // save the connected device's name
