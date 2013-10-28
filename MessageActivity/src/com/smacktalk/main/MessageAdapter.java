@@ -74,15 +74,32 @@ public class MessageAdapter extends BaseAdapter {
 			//Check whether message is mine to show green background and align to right
 			if(message.isMine())
 			{
-				holder.message.setBackgroundResource(R.drawable.speech_bubble_green);
+				if(MainActivity.myBubble == "Pink")
+				{
+					holder.message.setBackgroundResource(R.drawable.speech_bubble_pink);
+				}
+				else
+				{
+					holder.message.setBackgroundResource(R.drawable.speech_bubble_green);
+				}
+				
 				lp.gravity = Gravity.RIGHT;
 			}
 			//If not mine then it is from sender to show orange background and align to left
 			else
 			{
-				holder.message.setBackgroundResource(R.drawable.speech_bubble_orange);
+				if(MainActivity.yourBubble == "Red")
+				{
+					holder.message.setBackgroundResource(R.drawable.speech_bubble_orange);
+				}
+				else
+				{
+					holder.message.setBackgroundResource(R.drawable.speech_bubble_blue);
+				}
+				
 				lp.gravity = Gravity.LEFT;
 			}
+
 			holder.message.setLayoutParams(lp);
 			holder.message.setTextColor(0x7f040000);	
 		}

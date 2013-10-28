@@ -84,7 +84,16 @@ public class MessageActivity extends ListActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
+		if(MainActivity.background == "Purple")
+		{
+			setContentView(R.layout.maincopy);
+			
+		}
+		else
+		{
+			setContentView(R.layout.main);
+		}
+
 		
 		text = (EditText) this.findViewById(R.id.text);
 		

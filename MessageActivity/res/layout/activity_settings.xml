@@ -8,76 +8,61 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".SettingsActivity" >
 
-    <Spinner
-        android:id="@+id/spinner1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="258dp" />
-
-    <Spinner
-        android:id="@+id/Spinner01"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/spinner1"
-        android:layout_below="@+id/spinner1"
-        android:layout_marginTop="121dp" />
-
-    <TextView
-        android:id="@+id/TextView01"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/spinner1"
-        android:layout_marginTop="55dp"
-        android:text="Choose Color"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColorHint="@color/startButton"
-        android:textSize="50sp" />
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/Spinner01"
-        android:layout_below="@+id/Spinner01"
-        android:layout_marginLeft="191dp"
-        android:layout_marginTop="82dp"
-        android:text="Set User Name"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColorHint="@color/startButton"
-        android:textSize="50sp" />
+        android:background="@drawable/start_button"
+        android:text="SET" />
 
     <TextView
         android:id="@+id/TextView02"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/spinner1"
-        android:layout_alignLeft="@+id/TextView01"
-        android:layout_marginBottom="113dp"
-        android:text="Choose Font"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColorHint="@color/startButton"
-        android:textSize="50sp" />
+        android:text="Choose your bubble color"
+        android:textSize="20sp" />
 
-    <EditText
-        android:id="@+id/editText1"
+    <Spinner
+        android:id="@+id/Spinner03"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_alignRight="@+id/textView1"
-        android:layout_below="@+id/textView1"
-        android:ems="10" />
+        android:layout_above="@+id/button1"
+        android:layout_alignLeft="@+id/TextView02"
+        android:layout_marginBottom="18dp" />
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_alignRight="@+id/TextView02"
-        android:layout_below="@+id/editText1"
-        android:layout_marginRight="62dp"
-        android:background="@drawable/start_button"
-        android:text="SET" />
+    <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/Spinner03"
+        android:layout_alignLeft="@+id/Spinner03"
+        android:text="Choose background color"
+        android:textSize="20sp" />
+
+    <Spinner
+        android:id="@+id/Spinner01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/TextView02"
+        android:layout_below="@+id/TextView02" />
+
+    <Spinner
+        android:id="@+id/Spinner02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/TextView01"
+        android:layout_alignLeft="@+id/TextView01"
+        android:layout_marginBottom="31dp" />
+
+    <TextView
+        android:id="@+id/TextView03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/Spinner02"
+        android:layout_alignLeft="@+id/Spinner02"
+        android:text="Choose other&apos;s bubble color"
+        android:textSize="20sp" />
 
 </RelativeLayout>
