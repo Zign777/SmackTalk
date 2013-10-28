@@ -15,5 +15,6 @@
 	<color name="barLightColor">#F2F2F2</color>
 	<color name="startButton">#9900CC</color>
 	
+	<color name="background">#9900CC</color>
 
 </resources>
