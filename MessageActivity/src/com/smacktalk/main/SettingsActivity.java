@@ -38,7 +38,7 @@ public class SettingsActivity extends Activity {
 	  // add items into spinner dynamically
 	  public void addItemsOnSpinner1() {
 	 
-		spinner1 = (Spinner) findViewById(R.id.Spinner01);
+		spinner1 = (Spinner) findViewById(R.id.spinner1);
 		List<String> list = new ArrayList<String>();
 		list.add("Pink");
 		list.add("Blue");
@@ -50,7 +50,7 @@ public class SettingsActivity extends Activity {
 	  
 	  public void addItemsOnSpinner2() {
 			 
-		spinner2 = (Spinner) findViewById(R.id.Spinner02);
+		spinner2 = (Spinner) findViewById(R.id.spinner2);
 		List<String> list = new ArrayList<String>();
 		list.add("Green");
 		list.add("Red");
@@ -61,7 +61,7 @@ public class SettingsActivity extends Activity {
 		  }
 	  public void addItemsOnSpinner3() {
 			 
-		spinner3 = (Spinner) findViewById(R.id.Spinner03);
+		spinner3 = (Spinner) findViewById(R.id.spinner3);
 		List<String> list = new ArrayList<String>();
 		list.add("Black");
 		list.add("Purple");
@@ -74,9 +74,9 @@ public class SettingsActivity extends Activity {
 	  // get the selected dropdown list value
 	  public void addListenerOnButton() {
 	 
-		spinner1 = (Spinner) findViewById(R.id.Spinner01);
-		spinner2 = (Spinner) findViewById(R.id.Spinner02);
-		spinner3 = (Spinner) findViewById(R.id.Spinner03);
+		spinner1 = (Spinner) findViewById(R.id.spinner1);
+		spinner2 = (Spinner) findViewById(R.id.spinner2);
+		spinner3 = (Spinner) findViewById(R.id.spinner3);
 		btnSave = (Button) findViewById(R.id.button1);
 	 
 		btnSave.setOnClickListener(new OnClickListener() {
