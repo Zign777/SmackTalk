@@ -41,6 +41,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+//Adapted from https://github.com/ejp456/SmackTalk/blob/master/MessageActivity/src/com/smacktalk/main/SettingsActivity.java
+//Also the google Bluetooth chat example
 
 public class MessageActivity extends ListActivity {
 	/** Called when the activity is first created. */
