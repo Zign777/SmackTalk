@@ -113,8 +113,8 @@ public class SettingsActivity extends Activity {
 	 
 		    Toast.makeText(SettingsActivity.this,
 			"Saved : " + 
-	                "\nMy message bubble : "+ String.valueOf(spinner1.getSelectedItem()) + 
-	                "\nSFriend's message bubble : "+ String.valueOf(spinner2.getSelectedItem()) + 
+	                "\nYour message bubble : "+ String.valueOf(spinner1.getSelectedItem()) + 
+	                "\nOther's message bubble : "+ String.valueOf(spinner2.getSelectedItem()) + 
 	                "\nBackground : "+ String.valueOf(spinner3.getSelectedItem()),
 				Toast.LENGTH_SHORT).show();
 		  }
