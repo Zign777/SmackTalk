@@ -16,11 +16,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/secure_connect_scan"
           android:icon="@android:drawable/ic_menu_search"
-          android:title="secure_connect"
+          android:title="Clear History"
           android:showAsAction="ifRoom|withText" />
     <item android:id="@+id/insecure_connect_scan"
           android:icon="@android:drawable/ic_menu_search"
-          android:title="insecure_connect"
+          android:title="connect"
           android:showAsAction="ifRoom|withText" />
     <item android:id="@+id/discoverable"
           android:icon="@android:drawable/ic_menu_mylocation"

@@ -21,6 +21,8 @@ public class SmackTalkMessage {
 	 */
 	boolean isStatusMessage;
 	
+	int _id;
+	
 	/**
 	 * Constructor to make a Message object
 	 */
@@ -41,6 +43,19 @@ public class SmackTalkMessage {
 		this.isMine = false;
 		this.isStatusMessage = status;
 	}
+	
+	public SmackTalkMessage(){
+		
+	}
+	
+	public SmackTalkMessage(int id, String message, boolean isMine) {
+		super();
+		this._id = id;
+		this.message = message;
+		this.isMine = isMine;
+		this.isStatusMessage = false;
+	}
+	
 	public String getMessage() {
 		return message;
 	}
@@ -58,6 +73,14 @@ public class SmackTalkMessage {
 	}
 	public void setStatusMessage(boolean isStatusMessage) {
 		this.isStatusMessage = isStatusMessage;
+	}
+	
+	public int getID(){
+		return this._id;
+	}
+	
+	public void setID(int id){
+		this._id = id;
 	}
 	
 	

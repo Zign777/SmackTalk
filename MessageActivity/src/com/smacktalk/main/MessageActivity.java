@@ -1,7 +1,10 @@
 package com.smacktalk.main;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+
+
 
 
 
@@ -15,6 +18,7 @@ import com.color.speechbubble.R.id;
 import com.color.speechbubble.R.layout;
 import com.smacktalk.utility.BluetoothChatService;
 import com.smacktalk.utility.BroadcastChatService;
+import com.smacktalk.utility.MessagingDatabaseHelper;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -52,6 +56,7 @@ public class MessageActivity extends ListActivity {
 	EditText text;
 	static Random rand = new Random();	
 	static String sender;
+	public MessagingDatabaseHelper db;
 	 // Debugging
     private static final String TAG = "BluetoothChat";
     private static final boolean D = true;
@@ -98,21 +103,34 @@ public class MessageActivity extends ListActivity {
 
 		
 		text = (EditText) this.findViewById(R.id.text);
-		
-		sender = Utility.sender[rand.nextInt( Utility.sender.length-1)];
 		this.setTitle("SmackTalk");
 		messages = new ArrayList<SmackTalkMessage>();
 
-		messages.add(new SmackTalkMessage("Hello"+"\n - Etai", true));
-		messages.add(new SmackTalkMessage("Hi!"+"\n - Joelle", false));
-		messages.add(new SmackTalkMessage("What's up"+"\n - John", false));
+		//messages.add(new SmackTalkMessage("Hello"+"\n - Etai", true));
+		//messages.add(new SmackTalkMessage("Hi!"+"\n - Joelle", false));
+		//messages.add(new SmackTalkMessage("What's up"+"\n - John", false));
 		
 		adapter = new MessageAdapter(this, messages);
 		setListAdapter(adapter);
+		addNewMessage(new SmackTalkMessage("Start Chatting By Connecting To A Device.", false));
 		/*
 		 * IN THIS METHOD IS WHERE THE SCREEN BACKGROUND CAN BE CHANGED.
 		 * Also this same method can be used to show the messages in history
 		 */
+		/**
+		 * Database operations here
+		 */
+		db = new MessagingDatabaseHelper(this);
+		
+		// Reading all messages
+		Log.d("reading: ", "Reading all messages..");
+		// Check if the database exists, if so print all of the messages in it.
+			List<SmackTalkMessage> messages2 = db.getAllMessages();
+			for (SmackTalkMessage stm : messages2) {
+			String log = "Id: " + stm.getID() + " , Message: " + stm.getMessage() + " , isMine?: " + String.valueOf(stm.isMine());
+			addNewMessage(stm);
+			Log.d("Message: ", log);
+		}
 		
 		mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
@@ -187,6 +205,7 @@ public class MessageActivity extends ListActivity {
 	        super.onDestroy();
 	        // Stop the Bluetooth chat services
 	        if (mChatService != null) mChatService.stop();
+	        db.close();
 	        if(D) Log.e(TAG, "--- ON DESTROY ---");
 	    }
 
@@ -278,6 +297,7 @@ public class MessageActivity extends ListActivity {
                 // construct a string from the buffer
                 String writeMessage = new String(writeBuf);
                 addNewMessage(new SmackTalkMessage("Me: "+ writeMessage,true));
+                db.insertMessage(new SmackTalkMessage("Me: "+ writeMessage, true));
                 //can users messages to databases here
                 break;
             case MESSAGE_READ:
@@ -285,6 +305,7 @@ public class MessageActivity extends ListActivity {
                 // construct a string from the valid bytes in the buffer
                 String readMessage = new String(readBuf, 0, msg.arg1);
                 addNewMessage(new SmackTalkMessage(mConnectedDeviceName+":  " + readMessage,false));
+                db.insertMessage(new SmackTalkMessage(readMessage, false));
                 //can add received messages to database here
                 break;
             case MESSAGE_DEVICE_NAME:
@@ -354,8 +375,12 @@ public class MessageActivity extends ListActivity {
         switch (item.getItemId()) {
         case R.id.secure_connect_scan:
             // Launch the DeviceListActivity to see devices and do scan
-            serverIntent = new Intent(this, DeviceListActivity.class);
-            startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE_SECURE);
+            //serverIntent = new Intent(this, DeviceListActivity.class);
+            //startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE_SECURE);
+        	db.clearAll();
+        	messages.clear();
+        	adapter.notifyDataSetChanged();
+    		getListView().setSelection(messages.size()-1);
             return true;
         case R.id.insecure_connect_scan:
             // Launch the DeviceListActivity to see devices and do scan
