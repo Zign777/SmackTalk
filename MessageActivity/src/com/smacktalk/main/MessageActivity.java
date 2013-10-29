@@ -305,7 +305,7 @@ public class MessageActivity extends ListActivity {
                 // construct a string from the valid bytes in the buffer
                 String readMessage = new String(readBuf, 0, msg.arg1);
                 addNewMessage(new SmackTalkMessage(mConnectedDeviceName+":  " + readMessage,false));
-                db.insertMessage(new SmackTalkMessage(mConnectedDeviceName+readMessage, false));
+                db.insertMessage(new SmackTalkMessage(mConnectedDeviceName+": "+readMessage, false));
                 //can add received messages to database here
                 break;
             case MESSAGE_DEVICE_NAME:
